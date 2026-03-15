@@ -1,45 +1,22 @@
-# CarritoDeCompras
-/**
- * Representa un producto individual en la tienda.
- * @author Floren
- */
-public class Item {
-    private String nombre;
-    private double precio;
+# Carrito de Compras - Proyecto de Refactorización (DAW)
 
-    // Constantes para límites de negocio (Hiperparámetros)
-    private static final double PRECIO_MINIMO = 0.0;
-    private static final double PRECIO_MAXIMO = 10000.0;
+Este proyecto es el resultado de una práctica de refactorización de código Java, centrada en la aplicación de buenos principios de diseño (SOLID), manejo de excepciones y mejora de la escalabilidad.
 
-    public Item(String nombre, double precio) {
-        setNombre(nombre);
-        setPrecio(precio);
-    }
+## 🛠️ Mejoras Implementadas
 
-    public String getNombre() {
-        return nombre;
-    }
+- **Separación de Responsabilidades:** Se separó la lógica de negocio (Carrito e Item) de la interfaz de usuario (Main).
+- **Encapsulamiento:** Los atributos de `Item` ahora son privados, protegidos por Getters y Setters con validaciones para evitar precios negativos o desorbitados.
+- **Escalabilidad:** Se sustituyó `ArrayList` por `LinkedHashMap<Item, Integer>`. Esto permite:
+  - Búsquedas más rápidas.
+  - Gestión nativa de **cantidades** por cada producto.
+- **Manejo de Errores:** Implementación de excepciones como `IllegalArgumentException` y `NoSuchElementException`.
+- **Código Limpio:** Uso de constantes para símbolos de moneda y límites de negocio, eliminando "números mágicos" y cadenas de texto sueltas.
 
-    public void setNombre(String nombre) {
-        if (nombre == null || nombre.trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre no puede estar vacío.");
-        }
-        this.nombre = nombre;
-    }
+## 🚀 Cómo ejecutarlo
+1. Clona el repositorio o descarga los archivos `.java`.
+2. Compila con `javac Main.java`.
+3. Ejecuta con `java Main`.
 
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        if (precio < PRECIO_MINIMO || precio > PRECIO_MAXIMO) {
-            throw new IllegalArgumentException("Precio fuera de rango permitido (0 - 10000).");
-        }
-        this.precio = precio;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s - %.2f", nombre, precio);
-    }
-}
+## 📚 Documentación
+El código incluye comentarios en formato **Javadoc**. Para generar la documentación HTML, utiliza:
+`javadoc -d doc *.java`
